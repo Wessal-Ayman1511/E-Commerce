@@ -1,10 +1,11 @@
 import express from 'express'
 import { dbConnection } from './db/dbConnection.js';
 import { user_routes } from './Modules/UserModule/UserRoutes.js';
+import cookieParser from 'cookie-parser';
 
-
-const app = express();
 dbConnection
+const app = express();
+app.use(cookieParser()); 
 app.use(express.json())
 app.use(user_routes)
 
