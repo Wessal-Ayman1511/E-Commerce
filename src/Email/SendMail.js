@@ -2,10 +2,15 @@
 import nodemailer from 'nodemailer'
 import jwt from 'jsonwebtoken'
 import { mailTemplate } from './MailTemplate.js'
-export default function sendEmail (token){
+import User from '../../db/models/user.model.js'
+import { generateToken } from '../utilities/createToken.js'
 
+export default function sendEmail (token){
 let dec_token = jwt.decode(token)
 let email = dec_token.email
+console.log(email)
+
+// console.log("user email issssssss", email)
 
 const transporter = nodemailer.createTransport({
     service: 'gmail',

@@ -14,7 +14,7 @@ const signup = asyncHandler(async (req, res, next) =>
             new_user.password = await bcryptjs.hash(req.body.password, 8);
             
             await User.create(new_user);
-            const token = generateToken(res, new_user.email)
+            const token = generateToken(res, new_user._id, new_user.email)
             sendEmail(token)
 
             const { password, ...userWithoutPassword } = new_user  //exclude password completely
@@ -47,6 +47,8 @@ const logIn = asyncHandler(async(req, res) =>{
         if(isPasswordValid)
         {
             const token = generateToken(res, existingUser._id, existingUser.email);
+
+            const token = await generateToken(res, existingUser._id, existingUser.email);
 
             res.status(200)
             .json({
