@@ -42,6 +42,21 @@ const addToCart = asyncHandler(async (req, res, next) => {
   } 
 );
 
+
+
+const viewCart = asyncHandler(async (req, res) => {
+    const userId = req.user._id;
+
+    let cart = await Cart.findOne({ user: userId }).populate("items.product", "name price description");
+
+    if (!cart) {
+        return res.status(404).json({ message: "Cart is empty" });
+    }
+
+    res.json({ cart });
+});
+
+
 const updateProductQuantity = asyncHandler(async (req, res) => {
     const { productId, quantity } = req.body;
 
@@ -91,12 +106,29 @@ const deleteProductFromCart = asyncHandler(
         if (!cart) {
             return res.status(404).json({ message: "No cart associated with that user" });
         }
+        
         cart.items = cart.items.filter((item)=>item.product.toString() != productId)
         
+
         await cart.save();
         res.json({ message: "Product removed from cart", cart });
 
     }
 )
 
-export { addToCart, updateProductQuantity, deleteProductFromCart };
+const clearCart = asyncHandler(async (req, res) => {
+    const userId = req.user._id;
+
+    let cart = await Cart.findOne({ user: userId });
+    if (!cart) {
+        return res.status(404).json({ message: "No cart found" });
+    }
+
+    cart.items = [];
+    await cart.save();
+
+    res.json({ message: "Cart cleared successfully", cart });
+});
+
+
+export { addToCart, updateProductQuantity, deleteProductFromCart, clearCart, viewCart };
