@@ -54,11 +54,6 @@ const addProduct = asyncHandler(async (req, res) => {
             return res.status(400).json({ error: "All fields are required" });
         }
 
-        // const existingProduct = await Product.findOne({ name, brand });
-
-        // if (existingProduct) {
-        //     return res.status(409).json({ error: "Product already exists with the same brand" });
-        // }
 
         const product = new Product({ ...req.fields });
         await product.save();

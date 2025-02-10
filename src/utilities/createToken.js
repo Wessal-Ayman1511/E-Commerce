@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken"
 
-export const generateToken = (res, userId) => {
-    const token = jwt.sign({userId}, "key", {
+export const generateToken = (res, userId, email) => {
+    const token = jwt.sign({userId, email}, "key", {
         expiresIn: "30d"
     })
 
