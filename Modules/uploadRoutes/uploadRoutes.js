@@ -37,9 +37,10 @@ uploads_router.post("/uploads", (req, res) => {
     if (err) {
       res.status(400).send({ message: err.message });
     } else if (req.file) {
+    const imagePath = req.file.path.replace(/\\/g, "/");
       res.status(200).send({
         message: "Image uploaded successfully",
-        image: `/${req.file.path}`,
+        image: `/${imagePath}`,
       });
     } else {
       res.status(400).send({ message: "No image file provided" });
