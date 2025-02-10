@@ -4,8 +4,12 @@ import { user_routes } from './Modules/UserModule/UserRoutes.js';
 import cookieParser from 'cookie-parser';
 import category_routes from './Modules/CategoryModule/CategoryRoutes.js';
 import { product_routes } from './Modules/ProductModule/ProductRoutes.js';
+<<<<<<< Updated upstream
 import uploads_router from './Modules/uploadRoutes/uploadRoutes.js';
 import path from "path";
+=======
+import { cart_routes } from './Modules/CartModule/CartRoutes.js';
+>>>>>>> Stashed changes
 
 dbConnection
 const app = express();
@@ -14,6 +18,7 @@ app.use(express.json())
 app.use(user_routes)
 app.use(category_routes)
 app.use(product_routes)
+app.use(cart_routes)
 
 const __dirname = path.resolve();
 app.use(uploads_router, express.static(path.join(__dirname + "/uploads")));
