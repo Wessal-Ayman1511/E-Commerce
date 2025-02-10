@@ -48,8 +48,6 @@ const logIn = asyncHandler(async(req, res) =>{
         {
             const token = generateToken(res, existingUser._id, existingUser.email);
 
-            const token = await generateToken(res, existingUser._id, existingUser.email);
-
             res.status(200)
             .json({
                 _id: existingUser._id,
