@@ -2,42 +2,39 @@ import User from "../../db/models/user.model.js";
 import asyncHandler from "../../src/middlewares/asyncHandler.js";
 import bcryptjs from 'bcryptjs'
 import { generateToken } from "../../src/utilities/createToken.js";
+import sendEmail from "../../src/Email/SendMail.js";
+import jwt from "jsonwebtoken";
 
-const createUser = asyncHandler(async (req, res) => {
-    const {username, email, password} = req.body
-
-    if (!username || !email || !password)
-    {
-        throw new Error("Please fill all the inputs.")
-    }
-    const userExists = await User.findOne({email});
-    if (userExists) res.status(400).end("User already exists")
-
-    const salt = await bcryptjs.genSalt(10)
-    const hashedPassword = await bcryptjs.hash(password, salt)
-
-
-    
-    const newUser = User({username, email, password: hashedPassword})
-    try {
-        await newUser.save()
-        generateToken(res, newUser._id)
-        
-        res.status(201)
-        .json({
-            _id: newUser._id,
-            username: newUser.username,
-            email: newUser.email,
-            isAdmin: newUser.isAdmin
+const signup = asyncHandler(async (req, res, next) => 
+{
    
-        });
-        
-    } catch (error) {
-        res.status(400)
-        throw new Error("Invalid user data")
-        
-    }
+        let foundedUser = await User.findOne({ email: req.body.email });
+        if (!foundedUser) {
+            const new_user = { ...req.body };
+            new_user.password = await bcryptjs.hash(req.body.password, 8);
+            
+            await User.create(new_user);
+            const token = generateToken(res, new_user.email)
+            sendEmail(token)
+
+            const { password, ...userWithoutPassword } = new_user  //exclude password completely
+            res.status(201).json({ message: "User added successfully", userWithoutPassword, token });
+        } else {
+            res.status(409)
+            throw new Error("User already exists!");
+        }
 })
+
+
+export const VerifyAccount = async(req, res)=>
+{
+    jwt.verify(req.params.token, "key", async(error, decoded)=>{
+        if(error) return (res.json({message: "failed to verify Account"}))
+        await User.findOneAndUpdate({email: decoded.email}, {isConfirmed:true}, {new: true})
+        console.log("decoded data is ",decoded)
+        res.json({message: "Confirmed Successfuly"})
+    })
+}
 
 
 const logIn = asyncHandler(async(req, res) =>{
@@ -189,7 +186,7 @@ const updateUserById = asyncHandler(async (req, res) => {
  
 
 export {
-    createUser,
+    signup,
     logIn,
     logOut,
     getAllUsers,
