@@ -1,5 +1,5 @@
 import { Router } from "express"
-import { createUser,  deleteUserById,  getAllUsers,  getCurrentUserProfile,  getUserById,  logIn, logOut, updateCurrentUserProfile, updateUserById } from "../UserModule/UserController.js"
+import { VerifyAccount,deleteUserById,  getAllUsers,  getCurrentUserProfile,  getUserById,  logIn, logOut, signup, updateCurrentUserProfile, updateUserById } from "../UserModule/UserController.js"
 import { authenticated, authorizedAdmin } from "../../src/utilities/authMiddleware.js";
 
 
@@ -8,7 +8,10 @@ import { authenticated, authorizedAdmin } from "../../src/utilities/authMiddlewa
 export const user_routes = Router()
 
 // users creation
-user_routes.route("/users").post(createUser)
+user_routes.post("/signup",(signup))
+user_routes.get("/confirmpage/:token", VerifyAccount)
+
+
 
 
 
@@ -30,4 +33,3 @@ user_routes.route('/users/:id')
 
 
 user_routes.get('/users',authenticated, authorizedAdmin,getAllUsers)
-
