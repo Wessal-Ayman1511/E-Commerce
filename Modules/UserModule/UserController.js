@@ -21,7 +21,7 @@ const createUser = asyncHandler(async (req, res) => {
     const newUser = User({username, email, password: hashedPassword})
     try {
         await newUser.save()
-        const token = generateToken(res, newUser._id)
+        generateToken(res, newUser._id)
         
         res.status(201)
         .json({

@@ -2,7 +2,8 @@ import express from 'express'
 import { dbConnection } from './db/dbConnection.js';
 import { user_routes } from './Modules/UserModule/UserRoutes.js';
 import cookieParser from 'cookie-parser';
-import category_routes from './Modules/UserModule/CategoryModule/CategoryRoutes.js';
+import category_routes from './Modules/CategoryModule/CategoryRoutes.js';
+import { product_routes } from './Modules/ProductModule/ProductRoutes.js';
 
 dbConnection
 const app = express();
@@ -10,6 +11,7 @@ app.use(cookieParser());
 app.use(express.json())
 app.use(user_routes)
 app.use(category_routes)
+app.use(product_routes)
 
 
 

@@ -27,5 +27,7 @@ user_routes.route('/users/:id')
 .delete(authenticated, authorizedAdmin, deleteUserById)
 .get(authenticated, authorizedAdmin, getUserById)
 .put(authenticated, authorizedAdmin, updateUserById)
-.get(authenticated, authorizedAdmin,getAllUsers)
+
+
+user_routes.get('/users',authenticated, authorizedAdmin,getAllUsers)
 
