@@ -7,6 +7,8 @@ import category_routes from './Modules/CategoryModule/CategoryRoutes.js';
 import { product_routes } from './Modules/ProductModule/ProductRoutes.js';
 import uploads_router from './Modules/uploadRoutes/uploadRoutes.js';
 import path from "path";
+import { order_routes } from './Modules/OrderModule/OrderRoutes.js';
+
 
 dbConnection
 const app = express();
@@ -16,6 +18,8 @@ app.use(user_routes)
 app.use(category_routes)
 app.use(product_routes)
 app.use(cart_routes)
+app.use(order_routes)
+
 
 const __dirname = path.resolve();
 app.use(uploads_router, express.static(path.join(__dirname + "/uploads")));
