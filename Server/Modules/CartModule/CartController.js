@@ -102,14 +102,18 @@ const deleteProductFromCart = asyncHandler(
     
         const userId = req.user._id;
         const cart = await Cart.findOne({ user: userId });
-    
+        
         if (!cart) {
             return res.status(404).json({ message: "No cart associated with that user" });
         }
         
+        // let isFounded = cart.items.findIndex((item)=> item.product.toString()===productId)
+        // if(isFounded === -1)  
+        //     return res.status(404).json({message: "item already removed from the cart"})
+
+
         cart.items = cart.items.filter((item)=>item.product.toString() != productId)
         
-
         await cart.save();
         res.json({ message: "Product removed from cart", cart });
 
