@@ -8,6 +8,8 @@ import category_routes from './Modules/CategoryModule/CategoryRoutes.js';
 import { product_routes } from './Modules/ProductModule/ProductRoutes.js';
 import uploads_router from './Modules/uploadRoutes/uploadRoutes.js';
 import path from "path";
+import { order_routes } from './Modules/OrderModule/OrderRoutes.js';
+
 
 dbConnection
 const app = express();
@@ -17,9 +19,13 @@ app.use(user_routes)
 app.use(category_routes)
 app.use(product_routes)
 app.use(cart_routes)
+<<<<<<< HEAD
 app.use(wishlist_routes)
 app.use("*", (req, res)=>{res.status(404).json({message: "Error 404, not founded page"})})
 
+=======
+app.use(order_routes)
+>>>>>>> b966b7a14d2a2f4673f0866e82dbfea78a9cd3ea
 
 const __dirname = path.resolve();
 app.use(uploads_router, express.static(path.join(__dirname + "/uploads")));
