@@ -19,7 +19,7 @@ app.use(user_routes)
 app.use(category_routes)
 app.use(product_routes)
 app.use(cart_routes)
-<<<<<<< HEAD
+
 app.use(wishlist_routes)
 app.use("*", (req, res)=>{res.status(404).json({message: "Error 404, not founded page"})})
 
