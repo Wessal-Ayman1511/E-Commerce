@@ -2,6 +2,7 @@ import express from 'express'
 import { dbConnection } from './db/dbConnection.js';
 import { user_routes } from './Modules/UserModule/UserRoutes.js';
 import { cart_routes } from './Modules/CartModule/CartRoutes.js';
+import { wishlist_routes } from './Modules/WishlistModule/WishRoutes.js';
 import cookieParser from 'cookie-parser';
 import category_routes from './Modules/CategoryModule/CategoryRoutes.js';
 import { product_routes } from './Modules/ProductModule/ProductRoutes.js';
@@ -16,6 +17,9 @@ app.use(user_routes)
 app.use(category_routes)
 app.use(product_routes)
 app.use(cart_routes)
+app.use(wishlist_routes)
+app.use("*", (req, res)=>{res.status(404).json({message: "Error 404, not founded page"})})
+
 
 const __dirname = path.resolve();
 app.use(uploads_router, express.static(path.join(__dirname + "/uploads")));
