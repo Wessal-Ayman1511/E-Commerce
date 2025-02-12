@@ -23,9 +23,7 @@ app.use(cart_routes)
 app.use(wishlist_routes)
 app.use("*", (req, res)=>{res.status(404).json({message: "Error 404, not founded page"})})
 
-=======
 app.use(order_routes)
->>>>>>> b966b7a14d2a2f4673f0866e82dbfea78a9cd3ea
 
 const __dirname = path.resolve();
 app.use(uploads_router, express.static(path.join(__dirname + "/uploads")));
