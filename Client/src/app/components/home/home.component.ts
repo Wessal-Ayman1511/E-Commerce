@@ -1,3 +1,4 @@
+import { TermtextPipe } from './../../core/pipes/termtext.pipe';
 import { ProductsService } from './../../core/services/products.service';
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -7,11 +8,35 @@ import { CategoriesService } from '../../core/services/categories.service';
 import { ICategory } from '../../core/interfaces/icategory';
 import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
 import { RouterLink } from '@angular/router';
+import {
+  CurrencyPipe,
+  DatePipe,
+  JsonPipe,
+  LowerCasePipe,
+  SlicePipe,
+  UpperCasePipe,
+} from '@angular/common';
+import { SalePipe } from '../../core/pipes/sale.pipe';
+import { SearchPipe } from '../../core/pipes/search.pipe';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CarouselModule, RouterLink],
+  imports: [
+    CarouselModule,
+    FormsModule,
+    RouterLink,
+    UpperCasePipe,
+    LowerCasePipe,
+    SlicePipe,
+    CurrencyPipe,
+    DatePipe,
+    JsonPipe,
+    SalePipe,
+    TermtextPipe,
+    SearchPipe,
+  ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
 })
@@ -20,6 +45,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   private readonly _CategoriesService = inject(CategoriesService);
   ProductsList: Iproduct[] = [];
   CategoriesList: ICategory[] = [];
+  text: string = '';
   gitAllproducts!: Subscription;
 
   customOptionsMain: OwlOptions = {
