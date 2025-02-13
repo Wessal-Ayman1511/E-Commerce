@@ -9,10 +9,12 @@ import { environment } from '../environments/environment';
 export class ProductsService {
   //HttpClient
   private readonly _HttpClient = inject(HttpClient);
+
   getAllProducts(): Observable<any> {
     return this._HttpClient.get(`${environment.baseUrl}/api/v1/products`);
   }
-  getSpecificProducts(id: string): Observable<any> {
+  getSpecificProducts(id: string | null): Observable<any> {
     return this._HttpClient.get(`${environment.baseUrl}/api/v1/products/${id}`);
+    // return this._ProductsService.getSpecificProducts(id);
   }
 }

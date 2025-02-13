@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnDestroy } from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
@@ -11,6 +11,7 @@ import { AuthService } from '../../core/services/auth.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { NgClass } from '@angular/common';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-register',
@@ -79,6 +80,9 @@ export class RegisterComponent {
     } else return { mismatch: true };
   }
 
+  //unSubscribe observable
+  registerSub!: Subscription;
+
   registerSubmit(): void {
     if (this.registerFormGroup.valid) {
       this.isLoading = true;
@@ -108,5 +112,8 @@ export class RegisterComponent {
       this.registerFormGroup.setErrors({ mismatch: true });
       this.registerFormGroup.markAllAsTouched();
     }
+  }
+  OnDestroy(): void {
+    this.registerSub?.unsubscribe();
   }
 }

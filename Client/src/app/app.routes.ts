@@ -1,3 +1,4 @@
+import { DetailsComponent } from './components/details/details.component';
 import { CategoriesComponent } from './components/categories/categories.component';
 import { ProductComponent } from './components/product/product.component';
 import { BrandsComponent } from './components/brands/brands.component';
@@ -34,6 +35,7 @@ export const routes: Routes = [
       { path: 'cart', component: CartComponent },
       { path: 'brands', component: BrandsComponent },
       { path: 'categories', component: CategoriesComponent },
+      { path: 'details/:id', component: DetailsComponent },
     ],
   },
   {
