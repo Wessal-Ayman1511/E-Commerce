@@ -1,6 +1,7 @@
 import { ProductsService } from './../../core/services/products.service';
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Iproduct } from '../../core/interfaces/iproduct';
 
 @Component({
   selector: 'app-home',
@@ -11,14 +12,16 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class HomeComponent implements OnInit {
   private readonly _ProductsService = inject(ProductsService);
+  ProductsList: Iproduct[] = [];
   ngOnInit(): void {
-    this._ProductsService.getAllProducts().subscribe(
-      (res) => {
-        console.log(res);
+    this._ProductsService.getAllProducts().subscribe({
+      next: (res) => {
+        console.log(res.data);
+        this.ProductsList = res.data;
       },
-      (err: HttpErrorResponse) => {
+      error: (err: HttpErrorResponse) => {
         console.log(err);
-      }
-    );
+      },
+    });
   }
 }
