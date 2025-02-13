@@ -1,0 +1,105 @@
+<!-- main slider -->
+
+<section>
+
+  <div class="row g-0">
+    <div class="col-md-10">
+
+      <owl-carousel-o [options]="customOptionsMain">
+        <ng-template carouselSlide><img
+            src="https://img.freepik.com/free-vector/flat-horizontal-banner-template-black-friday-sale_23-2150852978.jpg"
+            height="300px" class="w-100" alt=""></ng-template>
+        <ng-template carouselSlide><img
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIKKXW_ZrJ354Q5xq_03Szh9CPxGrRwcHz9Q&s"
+            height="300px" class="w-100" alt=""></ng-template>
+        <ng-template carouselSlide><img
+            src="https://casalsonline.es/wp-content/uploads/2018/12/CASALS-ONLINE-18-DICIEMBRE.png" height="300px"
+            class="w-100" alt=""></ng-template>
+
+        <ng-template carouselSlide><img src="./assets/images/img1.avif" height="300px" class="w-100"
+            alt=""></ng-template>
+        <ng-template carouselSlide><img src="./assets/images/img1.avif" height="300px" class="w-100"
+            alt=""></ng-template>
+
+        <ng-template carouselSlide><img src="./assets/images/img1.avif" height="300px" class="w-100"
+            alt=""></ng-template>
+
+      </owl-carousel-o>
+
+
+    </div>
+    <div class="col-md-2">
+      <div><img src="https://casalsonline.es/wp-content/uploads/2018/12/CASALS-ONLINE-18-DICIEMBRE.png" height="150px"
+          class="w-100" alt="">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIKKXW_ZrJ354Q5xq_03Szh9CPxGrRwcHz9Q&s"
+          height="150px" class="w-100" alt="">
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+
+
+<!-- categories -->
+<section class="my-2">
+  <h2>popular categories</h2>
+  <owl-carousel-o [options]="customOptionsCategories">
+
+    @for (cat of CategoriesList; track cat._id) {
+    <ng-template carouselSlide>
+      <!-- content -->
+      <div>
+        <img src="" alt="">
+      </div>
+      <img [src]="cat.image" height="250px" class="w-100" [alt]="cat.name">
+      <h3 class="h6 test-main">{{cat.name}}</h3>
+    </ng-template>
+    }
+
+  </owl-carousel-o>
+</section>
+
+
+<!--  products -->
+<section>
+  <h2>popular products:</h2>
+  <div class="row g-3">
+    @for (product of ProductsList.slice(0,12); track product.id) {
+    <div class="col-md-2">
+
+      <div class="product p-2">
+
+
+        <div [routerLink]="['/details',product.id]">
+          <img [src]="product.imageCover" class="w-100" [alt]="product.title" />
+          <h3 class="smaill text-main">{{product.category.name}}</h3>
+          <h4 class="h6">{{product.title.split(' ' ,2).join(' ')}}</h4>
+          <div class="d-flex justify-content-between align-items-center">
+            <span>{{product.price}} EGP</span>
+            <div>
+              @for (num of [1,2,3,4,5].slice(0,product.ratingsAverage); track $index) {
+              <span>
+                <i class="fas fa-star reting-color"></i>
+
+              </span>
+              }
+              @if (product.ratingsAverage %1 != 0) {
+              <i class="fa-solid fa-star-half-stroke reting-color"></i>
+              }
+              <span><i class="text-muted"></i>{{product.ratingsAverage}}</span>
+            </div>
+          </div>
+        </div>
+
+
+        <button class="btn-main w-100">Add to Cart</button>
+      </div>
+
+    </div>
+    }
+  </div>
+</section>

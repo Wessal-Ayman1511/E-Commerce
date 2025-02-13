@@ -1,0 +1,81 @@
+<section class="bg-main-light shadow p-2 my-2 rounded-4">
+  <h1 class="h2 text-main">login Now:</h1>
+
+  <form [formGroup]="loginFormGroup" (ngSubmit)="loginSubmit()">
+
+
+
+    <div class="my-2">
+      <label for="email">email</label>
+      <input [ngClass]="{
+
+      'is-valid': !loginFormGroup.get('email')?.errors && (loginFormGroup.get('email')?.touched
+    ||loginFormGroup.get('email')?.dirty),
+      'is-invalid':loginFormGroup.get('email')?.errors && (loginFormGroup.get('email')?.touched
+    ||loginFormGroup.get('email')?.dirty)
+
+
+
+
+    }" id="email" type="email" class="form-control" formControlName="email">
+
+
+      @if (loginFormGroup.get('email')?.errors && loginFormGroup.get('email')?.touched) {
+      <div class="alert alert-danger w-50">
+        @if (loginFormGroup.get('email')?.getError('required')) {
+        <p class="m-0"> email required</p>
+        }@else if (loginFormGroup.get('email')?.getError('email')) {
+        <p class="m-0">Enter Valid Email </p>
+        }
+
+      </div>
+      }
+
+
+    </div>
+
+
+    <div class="my-2">
+      <label for="password">password</label>
+      <input [ngClass]="{
+
+      'is-valid': !loginFormGroup.get('password')?.errors && (loginFormGroup.get('password')?.touched
+    ||loginFormGroup.get('password')?.dirty),
+      'is-invalid':loginFormGroup.get('password')?.errors && (loginFormGroup.get('password')?.touched
+    ||loginFormGroup.get('password')?.dirty)
+
+
+
+
+    }" id="password" type="password" class="form-control" formControlName="password">
+
+
+      @if (loginFormGroup.get('password')?.errors && loginFormGroup.get('password')?.touched) {
+      <div class="alert alert-danger w-50">
+        @if (loginFormGroup.get('password')?.getError('required')) {
+        <p class="m-0"> password required</p>
+        }@else if (loginFormGroup.get('password')?.getError('pattern')) {
+        <p class="m-0">Enter Valid password </p>
+        }
+
+      </div>
+      }
+
+    </div>
+
+
+    <button type="submit" class="btn-main ms-auto d-block">login
+
+
+      @if (isLoading) {
+      <span><i class="fas fa-span fa-spinner"></i></span>
+      }
+    </button>
+    @if (msgError) {
+    <p class="alert alert-danger w-50 m-0">{{ msgError }}</p>
+    }
+    @if (msgSuccess) {
+    <p class="btn-main">success</p>
+    }
+  </form>
+</section>
