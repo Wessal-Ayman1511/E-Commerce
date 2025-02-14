@@ -21,9 +21,9 @@ export const routes: Routes = [
     component: AuthLayoutComponent,
     canActivate: [logedGuard],
     children: [
-      { path: '', redirectTo: 'login', pathMatch: 'full' },
-      { path: 'login', component: LoginComponent },
-      { path: 'register', component: RegisterComponent },
+      { path: '', redirectTo: 'auth', pathMatch: 'full' },
+      { path: 'auth', component: LoginComponent },
+      { path: 'signup', component: RegisterComponent },
     ],
   },
   {

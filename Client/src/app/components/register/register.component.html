@@ -5,29 +5,30 @@
 
 
     <div class="my-2">
-      <label for="name">name</label>
+      <label for="username">username</label>
       <input [ngClass]="{
 
-        'is-valid': !registerFormGroup.get('name')?.errors && (registerFormGroup.get('name')?.touched
-      ||registerFormGroup.get('name')?.dirty),
-        'is-invalid':registerFormGroup.get('name')?.errors && (registerFormGroup.get('name')?.touched
-      ||registerFormGroup.get('name')?.dirty)
+        'is-valid': !registerFormGroup.get('username')?.errors && (registerFormGroup.get('username')?.touched
+      ||registerFormGroup.get('username')?.dirty),
+        'is-invalid':registerFormGroup.get('username')?.errors && (registerFormGroup.get('username')?.touched
+      ||registerFormGroup.get('username')?.dirty)
 
 
 
 
-      }" id="name" type="text" class="form-control" formControlName="name">
-      @if (registerFormGroup.get('name')?.errors && (registerFormGroup.get('name')?.touched
-      ||registerFormGroup.get('name')?.dirty)) {
+      }" id="username" type="text" class="form-control" formControlName="username">
+      @if (registerFormGroup.get('username')?.errors && (registerFormGroup.get('username')?.touched
+      ||registerFormGroup.get('username')?.dirty)) {
       <div class="alert alert-danger w-50">
-        @if (registerFormGroup.get('name')?.getError('required')) {
+        @if (registerFormGroup.get('username')?.getError('required')) {
         <P class="m-0">
-          "Name is required"
+          "username is required"
 
         </P>
-        }@else if(registerFormGroup.get('name')?.getError('minlength'))
-        { <P class="m-0">"Name Should be more than or equal 3 chars"</P>
-        }@else if (registerFormGroup.get('name')?.getError('maxlength')) { <P class="m-0">"Name Should be less than or
+        }@else if(registerFormGroup.get('username')?.getError('minlength'))
+        { <P class="m-0">"username Should be more than or equal 3 chars"</P>
+        }@else if (registerFormGroup.get('username')?.getError('maxlength')) { <P class="m-0">"username Should be less
+          than or
           equal
           20 chars"
 
@@ -59,7 +60,7 @@
         @if (registerFormGroup.get('email')?.getError('required')) {
         <p class="m-0"> email required</p>
         }@else if (registerFormGroup.get('email')?.getError('email')) {
-        <p class="m-0">Enter Valid Email </p>
+        <p class="m-0">Enter Valid email </p>
         }
 
       </div>
@@ -68,35 +69,6 @@
 
     </div>
 
-    <div class="my-2">
-      <label for="phone">phone</label>
-      <input [ngClass]="{
-
-      'is-valid': !registerFormGroup.get('phone')?.errors && (registerFormGroup.get('phone')?.touched
-    ||registerFormGroup.get('phone')?.dirty),
-      'is-invalid':registerFormGroup.get('phone')?.errors && (registerFormGroup.get('phone')?.touched
-    ||registerFormGroup.get('phone')?.dirty)
-
-
-
-
-    }" id="phone" type="tel" class="form-control" formControlName="phone">
-
-
-
-      @if (registerFormGroup.get('phone')?.errors && registerFormGroup.get('phone')?.touched) {
-      <div class="alert alert-danger w-50">
-        @if (registerFormGroup.get('phone')?.getError('required')) {
-        <p class="m-0"> phone required</p>
-        }@else if (registerFormGroup.get('phone')?.getError('pattern')) {
-        <p class="m-0">Enter Valid phone </p>
-        }
-
-      </div>
-      }
-
-
-    </div>
 
     <div class="my-2">
       <label for="password">password</label>
@@ -126,27 +98,6 @@
 
     </div>
 
-    <div class="my-2">
-      <label for="rePassword">rePassword</label>
-      <input [ngClass]="{
-
-      'is-valid': !registerFormGroup.get('rePassword')?.errors && (registerFormGroup.get('rePassword')?.touched
-    ||registerFormGroup.get('rePassword')?.dirty),
-      'is-invalid':registerFormGroup.get('rePassword')?.errors && (registerFormGroup.get('rePassword')?.touched
-    ||registerFormGroup.get('rePassword')?.dirty)
-
-
-
-
-    }" id="rePassword" type="password" class="form-control" formControlName="rePassword">
-
-
-
-      @if (registerFormGroup.getError('mismatch') && registerFormGroup.get('rePassword')?.touched) {
-      <p class="m-0 alert alert-danger w-50">"Password confirmation is incorrect"</p>
-      }
-
-    </div>
 
     <button type="submit" class="btn-main ms-auto d-block">Register
 

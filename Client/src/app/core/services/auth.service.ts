@@ -13,16 +13,10 @@ export class AuthService {
 
   userData: any = null;
   setRegisterForm(data: object): Observable<any> {
-    return this._HttpClient.post(
-      `${environment.baseUrl}/api/v1/auth/signup`,
-      data
-    );
+    return this._HttpClient.post(`${environment.baseUrl}/signup`, data);
   }
   setloginForm(data: object): Observable<any> {
-    return this._HttpClient.post(
-      `${environment.baseUrl}/api/v1/auth/signin`,
-      data
-    );
+    return this._HttpClient.post(`${environment.baseUrl}/auth`, data);
   }
 
   saveUserData(): void {
@@ -36,7 +30,7 @@ export class AuthService {
     localStorage.removeItem('userToken');
     this.userData = null;
     //navigate  login
-    this._Router.navigate(['/login']);
+    this._Router.navigate(['/auth']);
   }
 }
 
