@@ -1,3 +1,5 @@
+import { OrdersComponent } from './components/orders/orders.component';
+import { AllordersComponent } from './components/allorders/allorders.component';
 import { DetailsComponent } from './components/details/details.component';
 import { CategoriesComponent } from './components/categories/categories.component';
 import { ProductComponent } from './components/product/product.component';
@@ -36,6 +38,9 @@ export const routes: Routes = [
       { path: 'brands', component: BrandsComponent },
       { path: 'categories', component: CategoriesComponent },
       { path: 'details/:id', component: DetailsComponent },
+      { path: 'allorders', component: AllordersComponent },
+
+      { path: 'orders/:id', component: OrdersComponent },
     ],
   },
   {

@@ -19,6 +19,8 @@ import {
 import { SalePipe } from '../../core/pipes/sale.pipe';
 import { SearchPipe } from '../../core/pipes/search.pipe';
 import { FormsModule } from '@angular/forms';
+import { CartService } from '../../core/services/cart.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-home',
@@ -43,6 +45,8 @@ import { FormsModule } from '@angular/forms';
 export class HomeComponent implements OnInit, OnDestroy {
   private readonly _ProductsService = inject(ProductsService);
   private readonly _CategoriesService = inject(CategoriesService);
+  private readonly _CartService = inject(CartService);
+  private readonly _ToastrService = inject(ToastrService);
   ProductsList: Iproduct[] = [];
   CategoriesList: ICategory[] = [];
   text: string = '';
@@ -125,5 +129,17 @@ export class HomeComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     //unSubscribe observable
     this.gitAllproducts?.unsubscribe();
+  }
+
+  addToCart(id: string): void {
+    this._CartService.addProductToCart(id).subscribe({
+      next: (res) => {
+        console.log(res);
+        this._ToastrService.success(res.message);
+      },
+      error: (err: HttpErrorResponse) => {
+        console.log(err);
+      },
+    });
   }
 }
