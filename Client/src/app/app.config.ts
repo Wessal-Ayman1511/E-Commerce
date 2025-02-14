@@ -12,7 +12,7 @@ import {
   BrowserAnimationsModule,
   provideAnimations,
 } from '@angular/platform-browser/animations';
-
+import { provideToastr } from 'ngx-toastr';
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
@@ -21,5 +21,6 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(withFetch()),
     // importProvidersFrom(BrowserAnimationsModule),
     provideAnimations(),
+    provideToastr(),
   ],
 };

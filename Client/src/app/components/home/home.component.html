@@ -67,8 +67,9 @@
 <!--  products -->
 <section>
   <h2>popular products:</h2>
+  <input [(ngModel)]="text" type="search" placeholder="Search By Name..." class="form-control w-50 mx-auto my-2">
   <div class="row g-3">
-    @for (product of ProductsList.slice(0,12); track product.id) {
+    @for (product of ProductsList.slice(0,12)|search:text; track product.id) {
     <div class="col-md-2">
 
       <div class="product p-2">
@@ -76,10 +77,10 @@
 
         <div [routerLink]="['/details',product.id]">
           <img [src]="product.imageCover" class="w-100" [alt]="product.title" />
-          <h3 class="smaill text-main">{{product.category.name}}</h3>
-          <h4 class="h6">{{product.title.split(' ' ,2).join(' ')}}</h4>
+          <h3 class="smaill text-main">{{product.category.name|termtext:1}}</h3>
+          <h4 class="h6">{{product.title|termtext:2}} </h4>
           <div class="d-flex justify-content-between align-items-center">
-            <span>{{product.price}} EGP</span>
+            <span>{{product.price|currency:'EGP'}} </span>
             <div>
               @for (num of [1,2,3,4,5].slice(0,product.ratingsAverage); track $index) {
               <span>
@@ -96,7 +97,7 @@
         </div>
 
 
-        <button class="btn-main w-100">Add to Cart</button>
+        <button class="btn-main w-100" (click)="addToCart(product.id)">Add to Cart</button>
       </div>
 
     </div>
