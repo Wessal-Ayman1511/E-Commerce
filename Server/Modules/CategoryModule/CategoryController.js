@@ -3,7 +3,7 @@ import asyncHandler from "../../src/middlewares/asyncHandler.js";
 import Category from "../../db/models/category.model.js"
 const createCategory = asyncHandler(async (req, res) => {
     try {
-      const { name } = req.body;
+      const { name, image } = req.body;
   
       if (!name) {
         return res.json({ error: "Name is required" });
@@ -15,7 +15,7 @@ const createCategory = asyncHandler(async (req, res) => {
         return res.json({ error: "Already exists" });
       }
   
-      const category = await new Category({ name }).save();
+      const category = await new Category({ name, image }).save();
       res.json(category);
     } catch (error) {
       console.log(error);
@@ -25,7 +25,7 @@ const createCategory = asyncHandler(async (req, res) => {
 
 const updateCategory = asyncHandler(async (req, res) => {
     try {
-      const { name } = req.body;
+      const { name, image } = req.body;
       const { categoryId } = req.params;
   
       const category = await Category.findOne({ _id: categoryId });
@@ -35,6 +35,7 @@ const updateCategory = asyncHandler(async (req, res) => {
       }
   
       category.name = name;
+      category.image = image 
   
       const updatedCategory = await category.save();
       res.json(updatedCategory);

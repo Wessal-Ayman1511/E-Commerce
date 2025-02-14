@@ -9,10 +9,20 @@ import { product_routes } from './Modules/ProductModule/ProductRoutes.js';
 import uploads_router from './Modules/uploadRoutes/uploadRoutes.js';
 import path from "path";
 import { order_routes } from './Modules/OrderModule/OrderRoutes.js';
+import cors from "cors"
+
 
 
 dbConnection
 const app = express();
+
+const corsOptions = {
+  origin: 'http://localhost:4200', 
+  methods: 'GET,POST,PUT,DELETE',
+  allowedHeaders: 'Content-Type,Authorization'
+};
+
+app.use(cors(corsOptions)); 
 app.use(cookieParser()); 
 app.use(express.json())
 app.use(user_routes)
@@ -21,7 +31,7 @@ app.use(product_routes)
 app.use(cart_routes)
 
 app.use(wishlist_routes)
-app.use("*", (req, res)=>{res.status(404).json({message: "Error 404, not founded page"})})
+//app.use("*", (req, res)=>{res.status(404).json({message: "Error 404, not founded page"})})
 
 app.use(order_routes)
 
