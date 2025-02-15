@@ -1,1 +1,39 @@
-<p>product works!</p>
+<section>
+  <h2>popular products:</h2>
+  <input [(ngModel)]="text" type="search" placeholder="Search By Name..." class="form-control w-50 mx-auto my-2">
+  <div class="row g-3">
+    @for (product of ProductsList.slice(0,12 )|search:text; track product.id) {
+    <div class="col-md-2">
+
+      <div class="product p-2">
+
+
+        <div [routerLink]="['/details',product._id]">
+          <img [src]="product.image" class="w-100" [alt]="product.description" />
+          <h3 class="smaill text-main">{{product.name|termtext:1}}</h3>
+          <h4 class="h6">{{product.description|termtext:2}} </h4>
+          <div class="d-flex justify-content-between align-items-center">
+            <span>{{product.price|currency:'EGP'}} </span>
+            <div>
+              @for (num of [1,2,3,4,5].slice(0,product.rating); track $index) {
+              <span>
+                <i class="fas fa-star reting-color"></i>
+
+              </span>
+              }
+              @if (product.rating %1 != 0) {
+              <i class="fa-solid fa-star-half-stroke reting-color"></i>
+              }
+              <span><i class="text-muted"></i>{{product.rating}}</span>
+            </div>
+          </div>
+        </div>
+
+
+        <button class="btn-main w-100" (click)="addToCart(product.id)">Add to Cart</button>
+      </div>
+
+    </div>
+    }
+  </div>
+</section>
