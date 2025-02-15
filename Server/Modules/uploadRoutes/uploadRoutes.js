@@ -3,15 +3,18 @@ import express from "express";
 import multer from "multer";
 
 const uploads_router = express.Router();
+const __dirname = path.resolve();
+const uploadPath = path.join("../Client/src/assets/uploads");
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, "uploads/");
+    cb(null, uploadPath);
   },
 
   filename: (req, file, cb) => {
     const extname = path.extname(file.originalname);
-    cb(null, `${file.fieldname}-${Date.now()}${extname}`);
+    const image = `${file.fieldname}-${Date.now()}${extname}`
+    cb(null, image);
   },
 });
 
@@ -37,7 +40,8 @@ uploads_router.post("/uploads", (req, res) => {
     if (err) {
       res.status(400).send({ message: err.message });
     } else if (req.file) {
-    const imagePath = req.file.path.replace(/\\/g, "/");
+    //const imagePath = req.file.path.replace(/\\/g, "/");
+    const imagePath = req.file.filename
       res.status(200).send({
         message: "Image uploaded successfully",
         image: `/${imagePath}`,
