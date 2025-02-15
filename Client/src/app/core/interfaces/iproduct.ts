@@ -1,33 +1,70 @@
-export interface Iproduct {
-  sold: number;
-  images: string[];
-  subcategory: Subcategory[];
-  ratingsQuantity: number;
-  _id: string;
-  title: string;
-  slug: string;
-  description: string;
-  quantity: number;
-  price: number;
-  imageCover: string;
-  category: Category;
-  brand: Category;
-  ratingsAverage: number;
-  createdAt: string;
-  updatedAt: string;
-  id: string;
-}
+// src/app/core/interfaces/product.interface.ts
 
-interface Category {
+export interface Iproduct {
   _id: string;
   name: string;
-  slug: string;
+  image: string;
+  brand: string;
+  quantity: number;
+  category: ICategory;
+  description: string;
+  rating: number;
+  numReviews: number;
+  price: number;
+  countInStock: number;
+  reviews: IReview[];
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
+}
+
+interface ICategory {
+  _id: string;
+  name: string;
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
   image: string;
 }
 
-interface Subcategory {
-  _id: string;
+interface IReview {
   name: string;
-  slug: string;
-  category: string;
+  rating: number;
+  comment: string;
+  user: string;
+  _id: string;
+  createdAt: string;
+  updatedAt: string;
 }
+
+// interface Category {
+//   _id: string;
+//   name: string;
+//   slug: string;
+//   image: string;
+// }
+
+// interface Subcategory {
+//   _id: string;
+//   name: string;
+//   slug: string;
+//   category: string;
+// }
+
+// export interface IProduct {
+//   _id: string;
+//   name: string;
+//   image: string;
+//   brand: string;
+//   quantity: number;
+//   category: ICategory;
+//   description: string;
+//   rating: number;
+//   numReviews: number;
+//   price: number;
+//   countInStock: number;
+//   reviews: IReview[];
+//   createdAt: string;
+//   updatedAt: string;
+//   __v: number;
+// }

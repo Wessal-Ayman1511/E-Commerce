@@ -11,10 +11,10 @@ export class ProductsService {
   private readonly _HttpClient = inject(HttpClient);
 
   getAllProducts(): Observable<any> {
-    return this._HttpClient.get(`${environment.baseUrl}/api/v1/products`);
+    return this._HttpClient.get(`${environment.baseUrl}/allProducts`);
   }
   getSpecificProducts(id: string | null): Observable<any> {
-    return this._HttpClient.get(`${environment.baseUrl}/api/v1/products/${id}`);
+    return this._HttpClient.get(`${environment.baseUrl}/product/${id}`);
     // return this._ProductsService.getSpecificProducts(id);
   }
 }

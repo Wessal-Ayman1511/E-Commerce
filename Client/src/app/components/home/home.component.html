@@ -6,33 +6,29 @@
     <div class="col-md-10">
 
       <owl-carousel-o [options]="customOptionsMain">
-        <ng-template carouselSlide><img
-            src="https://img.freepik.com/free-vector/flat-horizontal-banner-template-black-friday-sale_23-2150852978.jpg"
-            height="300px" class="w-100" alt=""></ng-template>
-        <ng-template carouselSlide><img
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIKKXW_ZrJ354Q5xq_03Szh9CPxGrRwcHz9Q&s"
-            height="300px" class="w-100" alt=""></ng-template>
-        <ng-template carouselSlide><img
-            src="https://casalsonline.es/wp-content/uploads/2018/12/CASALS-ONLINE-18-DICIEMBRE.png" height="300px"
-            class="w-100" alt=""></ng-template>
-
-        <ng-template carouselSlide><img src="./assets/images/img1.avif" height="300px" class="w-100"
+        <ng-template carouselSlide><img src="../../../assets/images/img1.avif" height="300px" class="w-100"
             alt=""></ng-template>
-        <ng-template carouselSlide><img src="./assets/images/img1.avif" height="300px" class="w-100"
+        <ng-template carouselSlide><img src="../../../assets/images/img2.avif" height="300px" class="w-100"
+            alt=""></ng-template>
+        <ng-template carouselSlide><img src="../../../assets/images/img3.avif" height="300px" class="w-100"
             alt=""></ng-template>
 
-        <ng-template carouselSlide><img src="./assets/images/img1.avif" height="300px" class="w-100"
+        <ng-template carouselSlide><img src="../../../assets/images/img4.avif" height="300px" class="w-100"
+            alt=""></ng-template>
+        <ng-template carouselSlide><img src="../../../assets/images/img5.avif" height="300px" class="w-100"
             alt=""></ng-template>
 
+        <ng-template carouselSlide><img src="../../../assets/images/img6.avif" height="300px" class="w-100"
+            alt=""></ng-template>
+        <ng-template carouselSlide><img src="../../../assets/images/img7.avif" height="300px" class="w-100"
+            alt=""></ng-template>
       </owl-carousel-o>
 
 
     </div>
     <div class="col-md-2">
-      <div><img src="https://casalsonline.es/wp-content/uploads/2018/12/CASALS-ONLINE-18-DICIEMBRE.png" height="150px"
-          class="w-100" alt="">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIKKXW_ZrJ354Q5xq_03Szh9CPxGrRwcHz9Q&s"
-          height="150px" class="w-100" alt="">
+      <div><img src="../../../assets/images/grocery-banner.png" height="150px" class="w-100" alt="">
+        <img src="../../../assets/images/grocery-banner-2.jpeg" height="150px" class="w-100" alt="">
       </div>
     </div>
   </div>
@@ -52,9 +48,11 @@
     @for (cat of CategoriesList; track cat._id) {
     <ng-template carouselSlide>
       <!-- content -->
-      <div>
-        <img src="" alt="">
-      </div>
+
+      <!-- <div>
+        <img src="./assets/images/slider-image-1.jpeg" height="250px" class="w-100" alt="">
+      </div> -->
+
       <img [src]="cat.image" height="250px" class="w-100" [alt]="cat.name">
       <h3 class="h6 test-main">{{cat.name}}</h3>
     </ng-template>
@@ -69,35 +67,35 @@
   <h2>popular products:</h2>
   <input [(ngModel)]="text" type="search" placeholder="Search By Name..." class="form-control w-50 mx-auto my-2">
   <div class="row g-3">
-    @for (product of ProductsList.slice(0,12)|search:text; track product.id) {
+    @for (product of ProductsList.slice(0,12); track product._id) {
     <div class="col-md-2">
 
       <div class="product p-2">
 
 
-        <div [routerLink]="['/details',product.id]">
-          <img [src]="product.imageCover" class="w-100" [alt]="product.title" />
-          <h3 class="smaill text-main">{{product.category.name|termtext:1}}</h3>
-          <h4 class="h6">{{product.title|termtext:2}} </h4>
+        <div [routerLink]="['/details',product._id]">
+          <img [src]="product.image" class="w-100" [alt]="product.description" />
+          <h3 class="smaill text-main">{{product.name|termtext:1}}</h3>
+          <h4 class="h6">{{product.description|termtext:2}} </h4>
           <div class="d-flex justify-content-between align-items-center">
             <span>{{product.price|currency:'EGP'}} </span>
             <div>
-              @for (num of [1,2,3,4,5].slice(0,product.ratingsAverage); track $index) {
+              @for (num of [1,2,3,4,5].slice(0,product.rating); track $index) {
               <span>
                 <i class="fas fa-star reting-color"></i>
 
               </span>
               }
-              @if (product.ratingsAverage %1 != 0) {
+              @if (product.rating %1 != 0) {
               <i class="fa-solid fa-star-half-stroke reting-color"></i>
               }
-              <span><i class="text-muted"></i>{{product.ratingsAverage}}</span>
+              <span><i class="text-muted"></i>{{product.rating}}</span>
             </div>
           </div>
         </div>
 
 
-        <button class="btn-main w-100" (click)="addToCart(product.id)">Add to Cart</button>
+        <button class="btn-main w-100" (click)="addToCart(product._id)">Add to Cart</button>
       </div>
 
     </div>
