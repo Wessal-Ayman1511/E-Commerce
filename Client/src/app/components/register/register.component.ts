@@ -28,59 +28,15 @@ export class RegisterComponent {
   isLoading: boolean = false;
   msgSuccess: boolean = false;
 
-  registerFormGroup: FormGroup = this._FormBuilder.group(
-    {
-      name: [
-        null,
-        [
-          Validators.required,
-          Validators.minLength(3),
-          Validators.maxLength(20),
-        ],
-      ],
-      email: [null, [Validators.required, Validators.email]],
-      password: [null, [Validators.required, Validators.pattern(/^\w{6,}$/)]],
-      rePassword: [null, [Validators.required, Validators.pattern(/^\w{6,}$/)]],
-      phone: [
-        null,
-        [Validators.required, Validators.pattern(/^01[0125][0-9]{8}$/)],
-      ],
-    },
-    {
-      validators: this.confirmPassword,
-    }
-  );
-  // registerFormGroup = new FormGroup(
-  //   {
-  //     name: new FormControl(null, [
-  //       Validators.required,
-  //       Validators.minLength(3),
-  //       Validators.maxLength(20),
-  //     ]),
-  //     email: new FormControl(null, [Validators.required, Validators.email]),
-  //     password: new FormControl(null, [
-  //       Validators.required,
-  //       Validators.pattern(/^\w{6,}$/),
-  //     ]),
-  //     rePassword: new FormControl(null, [
-  //       Validators.required,
-  //       Validators.pattern(/^\w{6,}$/),
-  //     ]),
-  //     phone: new FormControl(null, [
-  //       Validators.required,
-  //       Validators.pattern(/^01[0125][0-9]{8}$/),
-  //     ]),
-  //   },
-  //   this.confirmPassword
-  // );
+  registerFormGroup: FormGroup = this._FormBuilder.group({
+    username: [
+      null,
+      [Validators.required, Validators.minLength(3), Validators.maxLength(20)],
+    ],
+    email: [null, [Validators.required, Validators.email]],
+    password: [null, [Validators.required, Validators.pattern(/^\w{6,}$/)]],
+  });
 
-  confirmPassword(g: AbstractControl) {
-    if (g.get('password')?.value === g.get('rePassword')?.value) {
-      return null;
-    } else return { mismatch: true };
-  }
-
-  //unSubscribe observable
   registerSub!: Subscription;
 
   registerSubmit(): void {
@@ -96,7 +52,7 @@ export class RegisterComponent {
             if (res.message == 'success') {
               this.msgSuccess = true;
               setTimeout(() => {
-                this._Router.navigate(['/login']);
+                this._Router.navigate(['/auth']);
               }, 1000);
             }
             this.isLoading = false;

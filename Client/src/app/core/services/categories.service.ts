@@ -10,11 +10,9 @@ export class CategoriesService {
   constructor(private _HttpClient: HttpClient) {}
 
   getAllCategories(): Observable<any> {
-    return this._HttpClient.get(`${environment.baseUrl}/api/v1/categories`);
+    return this._HttpClient.get(`${environment.baseUrl}/categories`);
   }
   getSpecificCategory(id: string): Observable<any> {
-    return this._HttpClient.get(
-      `${environment.baseUrl}/api/v1/categories/${id}`
-    );
+    return this._HttpClient.get(`${environment.baseUrl}/category/${id}`);
   }
 }

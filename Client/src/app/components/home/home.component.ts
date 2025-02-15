@@ -52,6 +52,34 @@ export class HomeComponent implements OnInit, OnDestroy {
   text: string = '';
   gitAllproducts!: Subscription;
 
+  // ngOnInit(): void {
+  //   this._ProductsService.getAllProducts().subscribe({
+  //     next: (res) => {
+  //       console.log(res);
+  //       // res.forEach((product: Iproduct) => {
+  //       //   console.log(`${product.name} category:`, product.category);
+  //       // });
+  //       this.ProductsList = res;
+
+  //       // Extract unique categories and store in CategoriesList
+  //       const uniqueCategories = new Map();
+  //       res.forEach((product: Iproduct) => {
+  //         if (!uniqueCategories.has(product.category._id)) {
+  //           uniqueCategories.set(product.category._id, product.category);
+  //         }
+  //       });
+
+  //       this.CategoriesList = Array.from(uniqueCategories.values());
+
+  //       // Log to verify
+  //       console.log('Products:', this.ProductsList);
+  //       console.log('Categories:', this.CategoriesList);
+  //     },
+  //     error: (err: HttpErrorResponse) => {
+  //       console.log(err);
+  //     },
+  //   });
+  // }
   customOptionsMain: OwlOptions = {
     loop: true,
     mouseDrag: true,
@@ -109,8 +137,16 @@ export class HomeComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this._CategoriesService.getAllCategories().subscribe({
       next: (res) => {
-        console.log(res.data);
-        this.CategoriesList = res.data;
+        console.log(res);
+        this.CategoriesList = res;
+        const uniqueCategories = new Map();
+        res.forEach((product: Iproduct) => {
+          if (!uniqueCategories.has(product.category._id)) {
+            uniqueCategories.set(product.category._id, product.category);
+          }
+        });
+
+        this.CategoriesList = Array.from(uniqueCategories.values());
       },
       error: (err: HttpErrorResponse) => {
         console.log(err);
@@ -118,8 +154,16 @@ export class HomeComponent implements OnInit, OnDestroy {
     });
     this.gitAllproducts = this._ProductsService.getAllProducts().subscribe({
       next: (res) => {
-        console.log(res.data);
-        this.ProductsList = res.data;
+        console.log(res);
+        this.ProductsList = res;
+        const uniqueCategories = new Map();
+        res.forEach((product: Iproduct) => {
+          if (!uniqueCategories.has(product.category._id)) {
+            uniqueCategories.set(product.category._id, product.category);
+          }
+        });
+
+        this.CategoriesList = Array.from(uniqueCategories.values());
       },
       error: (err: HttpErrorResponse) => {
         console.log(err);
