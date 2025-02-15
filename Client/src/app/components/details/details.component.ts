@@ -23,8 +23,8 @@ export class DetailsComponent implements OnInit {
         //logic api   call api Specific product => getSpecificProducts
         this._ProductsService.getSpecificProducts(idProduct).subscribe({
           next: (res) => {
-            console.log(res.data);
-            this.detailsProduct = res.data;
+            console.log(res);
+            this.detailsProduct = res;
           },
           error: (err: HttpErrorResponse) => {
             console.log(err);

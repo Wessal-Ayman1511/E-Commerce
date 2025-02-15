@@ -14,30 +14,31 @@ export class CartService {
   };
   addProductToCart(id: string): Observable<any> {
     return this._HttpClient.post(
-      `${environment.baseUrl}/api/v1/cart `,
+      `${environment.baseUrl}/cart/add`,
       {
         // body
         productId: id,
+        quantity: 2,
       },
       { headers: this.myHeader }
     );
   }
 
   getProductsCart(): Observable<any> {
-    return this._HttpClient.get(`${environment.baseUrl}/api/v1/cart`, {
+    return this._HttpClient.get(`${environment.baseUrl}/cart/view`, {
       headers: this.myHeader,
     });
   }
 
   deleteSpecificCartItem(id: string): Observable<any> {
-    return this._HttpClient.delete(`${environment.baseUrl}/api/v1/cart/${id}`, {
+    return this._HttpClient.delete(`${environment.baseUrl}/cart/delete/${id}`, {
       headers: this.myHeader,
     });
   }
 
   updateSpecificCartItem(id: string, newCount: number): Observable<any> {
     return this._HttpClient.put(
-      `${environment.baseUrl}/api/v1/cart/${id}`,
+      `${environment.baseUrl}/cart/update/${id}`,
       {
         count: newCount,
       },
@@ -45,7 +46,7 @@ export class CartService {
     );
   }
   clearCart(): Observable<any> {
-    return this._HttpClient.delete(`${environment.baseUrl}/api/v1/cart`, {
+    return this._HttpClient.delete(`${environment.baseUrl}/cart/clearcart`, {
       headers: this.myHeader,
     });
   }
