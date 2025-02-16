@@ -1,1 +1,20 @@
-<p>categories works!</p>
+<!-- categories -->
+<section class="my-2">
+  <h2>popular categories</h2>
+  <owl-carousel-o [options]="customOptionsCategories">
+
+    @for (cat of CategoriesList; track cat._id) {
+    <ng-template carouselSlide>
+      <!-- content -->
+
+      <!-- <div>
+        <img src="./assets/images/slider-image-1.jpeg" height="250px" class="w-100" alt="">
+      </div> -->
+
+      <img [src]="cat.image" height="250px" class="w-100" [alt]="cat.name">
+      <h3 class="h6 test-main">{{cat.name}}</h3>
+    </ng-template>
+    }
+
+  </owl-carousel-o>
+</section>

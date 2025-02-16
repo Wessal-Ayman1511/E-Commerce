@@ -1,8 +1,9 @@
+<!--  products -->
 <section>
   <h2>popular products:</h2>
   <input [(ngModel)]="text" type="search" placeholder="Search By Name..." class="form-control w-50 mx-auto my-2">
   <div class="row g-3">
-    @for (product of ProductsList.slice(0,12 )|search:text; track product.id) {
+    @for (product of ProductsList.slice(0,12 )|search:text; track product._id) {
     <div class="col-md-2">
 
       <div class="product p-2">
@@ -30,7 +31,7 @@
         </div>
 
 
-        <button class="btn-main w-100" (click)="addToCart(product.id)">Add to Cart</button>
+        <button class="btn-main w-100" (click)="addToCart(product._id)">Add to Cart</button>
       </div>
 
     </div>

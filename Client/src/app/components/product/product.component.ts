@@ -92,11 +92,12 @@ export class ProductComponent implements OnInit, OnDestroy {
     //unSubscribe observable
     this.gitAllproducts?.unsubscribe();
   }
+
   addToCart(id: string): void {
     this._CartService.addProductToCart(id).subscribe({
       next: (res) => {
         console.log(res);
-        // this._ToastrService.success(res.message);
+        this._ToastrService.success(res.message);
       },
       error: (err: HttpErrorResponse) => {
         console.log(err);
