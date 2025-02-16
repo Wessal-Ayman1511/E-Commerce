@@ -64,9 +64,9 @@
 
 <!--  products -->
 <section>
-  <h2>popular products:</h2>
+  <h2 class="my-2">popular products:</h2>
   <input [(ngModel)]="text" type="search" placeholder="Search By Name..." class="form-control w-50 mx-auto my-2">
-  <div class="row g-3">
+  <div class="row g-3 mt-3">
     @for (product of ProductsList.slice(0,12 )|search:text; track product._id) {
     <div class="col-md-2">
 
@@ -74,7 +74,8 @@
 
 
         <div [routerLink]="['/details',product._id]">
-          <img [src]="product.image" class="w-100" [alt]="product.description" />
+          <img style="width: 250px;
+  height: 200px;" [src]="product.image" class="w-100" [alt]="product.description" />
           <h3 class="smaill text-main">{{product.name|termtext:1}}</h3>
           <h4 class="h6">{{product.description|termtext:2}} </h4>
           <div class="d-flex justify-content-between align-items-center">
